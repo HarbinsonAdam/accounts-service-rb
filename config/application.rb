@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require 'paseto'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -8,6 +9,8 @@ Bundler.require(*Rails.groups)
 
 module AccountsServiceRb
   class Application < Rails::Application
+    ::AUTH_TOKEN_KEY = Paseto::V4::Local.generate
+    ::REFRESH_TOKEN_KEY = Paseto::V4::Local.generate
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
@@ -23,5 +26,7 @@ module AccountsServiceRb
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    
   end
 end
